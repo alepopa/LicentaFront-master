@@ -30,7 +30,7 @@
 </div>
 
 <mat-form-field>
-  <mat-label>Components Schema</mat-label>
+  <mat-label>Component Schemas</mat-label>
   <mat-select [(ngModel)]="selectedComponent" (ngModelChange)="componentSchemaChange(selectedComponent)">
     <mat-option *ngFor="let eT  of componentNames" value="{{eT}}">
       {{eT}}

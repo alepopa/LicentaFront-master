@@ -1,0 +1,84 @@
+<div class="bigdiv">
+  <div class="row">
+
+    <div class="column mt-5 mr-5">
+      <mat-form-field>
+        <mat-label>Project</mat-label>
+        <mat-select [(ngModel)]="projectId" (ngModelChange)="projectIdChange(projectId)">
+          <mat-option *ngFor="let projectId  of allProjectIds" value="{{projectId}}">
+            {{projectId}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Quality Model Name</mat-label>
+        <input matInput value="" [(ngModel)]="qMName">
+      </mat-form-field>
+
+<!--      <div class="text-center">-->
+<!--        <button mat-raised-button color="primary" (click)="showResults()">View Quality Model</button>-->
+<!--      </div>-->
+
+    </div>
+
+    <div class="column mt-3">
+      <div class="row">
+        <div class="col-3 mb-2">
+          <button mat-mini-fab color="primary" (click)="addAxis()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="mt-2 ml-lg-n2 text-left">
+          <label>Add Axis</label>
+        </div>
+      </div>
+
+      <!--        <section class="container border mt-3 mb-3 p-3 shadow-sm p-4 mb-4 bg-white" *ngFor="let a of axis; let i = index;">-->
+      <section class="mt-2" *ngFor="let a of axis; let i = index;">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="a.name" name="address_{{a.id}}" placeholder="Axis Name"/>
+            </div>
+          </div>
+          <div class="col-6">
+            <button mat-mini-fab color="warn" (click)="removeAxis(i)">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <button mat-raised-button color="primary" (click)="logValue()">Submit</button>
+    </div>
+
+    <div class="column mt-3">
+      <mat-list>
+        <mat-list-item *ngFor="let qi of qualityIndicators">
+          {{qi}}
+          <mat-form-field class="right">
+            <mat-label>Axises</mat-label>
+            <mat-select [(ngModel)]="axisString" (ngModelChange)="selectAxisForQI(qi)">
+              <mat-option *ngFor="let a of axis" value="{{a.name}}">
+                {{a.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+  </div>
+</div>
+
+
+<!--<app-view-quality-model *ngIf="tableQIBool" [data]="tableQI" [captureScreenshot]="buttonView" ></app-view-quality-model>-->
+<app-view-quality-model *ngIf="tableQIBool" [data]="tableQI" ></app-view-quality-model>
+<button mat-raised-button color="primary" (click)="viewQualityModel()">View Quality Model</button>
+<div class="divider"></div>
+<button mat-flat-button color="primary" (click)="showResults()">Show body</button>
+<!--<button mat-flat-button color="primary" (click)="saveAsPNGFLG()">Save FLG</button>-->
+
+

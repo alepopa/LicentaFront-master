@@ -10,11 +10,13 @@ import {ComponentsComponent} from './components/components.component';
 import {UploadComponentComponent} from './components/upload-component/upload-component.component';
 import {ComponentsDetailComponent} from './components/components-detail/components-detail.component';
 import {ViewComponentQualityIndicatorComponent} from './projects/view-component-quality-indicator/view-component-quality-indicator';
+import {CreateQualityModelComponent} from './create-quality-model/create-quality-model.component';
 
 
 const routes: Routes = [
 
-  {path: 'createRelation', component: CreateRelationComponent},
+  // {path: 'createRelation', component: CreateRelationComponent},
+  {path: 'createQualityModel', component: CreateQualityModelComponent},
 
   {
     path: 'projects', component: ProjectsComponent, children: [

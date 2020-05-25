@@ -28,6 +28,9 @@ import {ComponentsDetailComponent} from './components/components-detail/componen
 import {ComponentsService} from './components/components.service';
 import {MatListModule} from '@angular/material/list';
 import {ViewComponentQualityIndicatorComponent} from './projects/view-component-quality-indicator/view-component-quality-indicator';
+import {CreateQualityModelComponent} from './create-quality-model/create-quality-model.component';
+import {MatIconModule} from '@angular/material/icon';
+import {ViewQualityModelComponent} from './view-quality-model/view-quality-model.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import {ViewComponentQualityIndicatorComponent} from './projects/view-component-
     UploadComponentComponent,
     ComponentsComponent,
     ComponentsListComponent,
-    ComponentsDetailComponent
+    ComponentsDetailComponent,
+    CreateQualityModelComponent,
+    ViewQualityModelComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,8 @@ import {ViewComponentQualityIndicatorComponent} from './projects/view-component-
     MatButtonModule,
     MatInputModule,
     MatTableModule,
-    MatListModule
+    MatListModule,
+    MatIconModule
   ],
   providers: [ProjectsService, ComponentsService],
   bootstrap: [AppComponent]

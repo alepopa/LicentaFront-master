@@ -134,8 +134,8 @@ export class ViewComponentQualityIndicatorComponent implements OnInit {
       this.propertyValueMap.set(getNamesPerComponent(this.table, c), getValues(this.table, c));
       console.log(getValues(this.table, c));
     }
-    console.log(this.componentValuesMap); // componentValueMap - valorile pe componenta
-    console.log(this.propertyValueMap);
+    // console.log(this.componentValuesMap); // componentValueMap - valorile pe componenta
+    // console.log(this.propertyValueMap);
 
     this.properties = getNames(this.table);
     this.components = getComponent(this.table); // toate componentele
@@ -144,7 +144,7 @@ export class ViewComponentQualityIndicatorComponent implements OnInit {
     this.valuesArray = Array.from(this.componentValuesMap.keys());
     this.doubleMap.set(this.valuesArray, this.propertyValueMap);
 
-    console.log(this.componentValuesMap.keys());
+    // console.log(this.componentValuesMap.keys());
     console.log(this.doubleMap);
   }
 }

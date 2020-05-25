@@ -59,7 +59,8 @@ export class ProjectsDetailComponent implements OnInit {
 
   onView1ProjectCharacterization() {
     this.httpClient.get('http://localhost:8080/create/View1?projectId=' + this.project.projectId + '&name=' + this.selectedComponent)
-      .subscribe(value => this.tableViewQA = value);
+      .subscribe(value => {this.tableViewQA = value;
+                           console.log(this.tableViewQA); });
     this.tableViewQABool = true;
     console.log(this.selectedComponent);
   }
