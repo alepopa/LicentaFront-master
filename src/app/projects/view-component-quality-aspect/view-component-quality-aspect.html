@@ -6,8 +6,8 @@
   </tr>
   <tr *ngFor="let c of components">
     <td>{{c}}</td>
-    <td *ngFor="let value of componentValuesMap.get(c)">
-      {{value ? (value | number: 0) : '' }}
+    <td *ngFor="let prop of properties">
+      {{componentToPropertiesMap.get(c).get(prop) ? (componentToPropertiesMap.get(c).get(prop) | number: 0) : '' }}
     </td>
   </tr>
 
