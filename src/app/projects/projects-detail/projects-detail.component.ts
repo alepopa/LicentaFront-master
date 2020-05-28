@@ -48,8 +48,8 @@ export class ProjectsDetailComponent implements OnInit {
 
     this.projectService.getComponents(this.project.projectId)
       .subscribe(components => this.componentNames = components.map(c => c.componentName),
-      error => console.log(error),
-      () => console.log(this.componentNames));
+        error => console.log(error),
+        () => console.log(this.componentNames));
   }
 
   componentSchemaChange(componentSchema: string) {
@@ -59,8 +59,10 @@ export class ProjectsDetailComponent implements OnInit {
 
   onView1ProjectCharacterization() {
     this.httpClient.get('http://localhost:8080/create/View1?projectId=' + this.project.projectId + '&name=' + this.selectedComponent)
-      .subscribe(value => {this.tableViewQA = value;
-                           console.log(this.tableViewQA); });
+      .subscribe(value => {
+        this.tableViewQA = value;
+        console.log(this.tableViewQA);
+      });
     this.tableViewQABool = true;
     console.log(this.selectedComponent);
   }

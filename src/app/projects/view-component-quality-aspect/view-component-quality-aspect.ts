@@ -19,12 +19,18 @@ export interface ComponentViewDTO {
 })
 
 export class ViewComponentQualityAspectComponent implements OnInit {
-  private table: any;
+  // tslint:disable-next-line:variable-name
+  private _data: any;
   projectId: string;
   name: string;
   componentValuesMap = new Map();
   doubleMap = new Map(new Map());
   propertyValueMap = new Map();
+
+
+  componentToPropertiesMap = new Map();
+
+
   components: string[];
   properties: string[];
   qaValuesArray: any[];
@@ -39,13 +45,13 @@ export class ViewComponentQualityAspectComponent implements OnInit {
   }
 
   @Input()
-  set data(table: Table) {
-    this.table = JSON.parse(JSON.stringify(table));
+  set data(d: Table[]) {
+    this._data = JSON.parse(JSON.stringify(d));
     this.createTable();
   }
 
   private createTable() {
-    console.log(this.table);
+    console.log(this._data);
 
     function getNames(table) {
 
@@ -99,27 +105,27 @@ export class ViewComponentQualityAspectComponent implements OnInit {
       return componentViewDTOS2;
     }
 
-    // function getIndependentValues(table) {
+    // function getIndependentValues(data) {
     //
     //   const componentViewDTOS1 = [];
     //   const componentViewDTOS2 = [];
-    //   table.forEach(table1 => {{componentViewDTOS1.push(table1.componentViewDTOS); } });
+    //   data.forEach(table1 => {{componentViewDTOS1.push(table1.componentViewDTOS); } });
     //   componentViewDTOS1.forEach(table2 => {table2.forEach(table3 => {componentViewDTOS2.push(table3.value); }); });
     //
     //   return componentViewDTOS2;
     // }
 
-    // function createColumn(i= 0, table) {
+    // function createColumn(i= 0, data) {
     //   const column = [];
-    //   while (i < getIndependentValues(table).length) {
-    //     column.push(getIndependentValues(table)[i]);
+    //   while (i < getIndependentValues(data).length) {
+    //     column.push(getIndependentValues(data)[i]);
     //     i = i + 17;
     //   }
     //   return column;
     // }
 
-    // for (let i = 0 ; i < getNames(this.table).length; i++) {
-    //     this.propertyValuesMap.set(getNames(this.table)[i], createColumn(i, this.table));
+    // for (let i = 0 ; i < getNames(this.data).length; i++) {
+    //     this.propertyValuesMap.set(getNames(this.data)[i], createColumn(i, this.data));
     //   }
     // console.log(this.propertyValuesMap);  // proprietate -> valori Total Severity Score -> [3, 7]
 
@@ -131,18 +137,35 @@ export class ViewComponentQualityAspectComponent implements OnInit {
       return nameComponent;
     }
 
-    for (const c of getComponent(this.table)) {
-      this.componentValuesMap.set(c, getValues(this.table, c));
-      this.propertyValueMap.set(getNamesPerComponent(this.table, c), getValues(this.table, c));
-      console.log(getValues(this.table, c));
+    for (const c of getComponent(this._data)) {
+      this.componentValuesMap.set(c, getValues(this._data, c));
+      this.propertyValueMap.set(getNamesPerComponent(this._data, c), getValues(this._data, c));
+      console.log(getValues(this._data, c));
+
+
     }
 
-    this.properties = getNames(this.table); // toate headerele
-    this.components = getComponent(this.table); // toate componentele
+    this._data.forEach((t: Table) => {
+      this.componentToPropertiesMap.set(t.componentName, this.transformToMap(t.componentViewDTOS));
+    });
+
+    console.log(this.componentToPropertiesMap);
+
+    this.properties = getNames(this._data); // toate headerele
+    this.components = getComponent(this._data); // toate componentele
     this.qaValuesArray = Array.from(this.componentValuesMap.values()); // toate valorile QA-urilor
     this.valuesArray = Array.from(this.componentValuesMap.keys());
     this.doubleMap.set(this.valuesArray, this.propertyValueMap);
 
     console.log(this.doubleMap);
+  }
+
+  private transformToMap(componentViewDTOS: ComponentViewDTO[]): Map<string, number> {
+    const propMap = new Map();
+    componentViewDTOS.forEach((cvd: ComponentViewDTO) => {
+      propMap.set(cvd.name, cvd.value);
+    });
+
+    return propMap;
   }
 }
